@@ -1,0 +1,337 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="./output.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+<title>Landing Page</title>
+</head>
+    <body class="pt-32">
+        <h1 class="text-3xl font-bold underline">
+            
+        </h1>
+<!-- Navbar -->
+            <nav class="bg-gray-800 text-white fixed top-0 left-0 right-0 z-50">
+            <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-4">
+<!-- Logo --> 
+    <a href="#" class="flex items-center">
+            <span class="text-white font-semibold text-lg">ZYNTEK</span>
+    </a>
+<!-- Search bar -->
+            <div class="flex-1 mx-4 relative">
+<!-- Icon search -->
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+    </svg>
+    </span>
+<!-- Input -->
+        <input
+        type="search"
+        id="default-search"
+        placeholder="Pencarian"
+        class="block w-full rounded-md pl-10 pr-4 py-2 text-sm text-gray-600 placeholder-gray-400 focus:outline-none"
+        />
+            </div>
+            <!-- Right section: Cart, Login, Daftar -->
+            <div class="flex items-center gap-4">
+            <a href="#" class="text-white hover:text-blue-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6H19M7 13l1.5-6H21" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+            </a>
+            <a href="login.html"
+                class="border border-blue-500 text-white px-4 py-1 rounded hover:bg-gray-900 transition">Login</a>
+            <a href="register.html"
+                class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600 transition">Daftar</a>
+            </div>
+        </div>
+        <!-- Menu navigasi bawah -->
+        <div class="bg-gray-600">
+            <div class="max-w-screen-xl mx-auto px-4 py-2 flex gap-6 text-sm">
+            <a href="#" class="hover:underline">Beranda</a>
+            <a href="#" class="hover:underline">Produk</a>
+            <a href="#" class="hover:underline">Customer Review</a>
+            <a href="#" class="hover:underline">Brand Ternama</a>
+            <a href="#" class="hover:underline">Contact Us</a>
+            </div>
+        </div>
+        </nav>
+<!-- Banner Section -->
+    <section class="max-w-screen-xl mx-auto px-4 py-6">
+        <img src="/foto/banner.png" alt="Banner Promo Zyntek" class="rounded-lg w-full object-cover h-auto shadow-md" />
+</section>
+    <section class="py-10 max-w-7xl mx-auto px-4">
+<!-- Judul -->
+        <h2 class="text-2xl font-bold text-center mb-10 text-gray-800" style="font-family: 'Jersey 20', sans-serif;">
+    Pilih Gadget Kesukaan Kamu
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+<!-- Kolom kiri -->
+    <div class="flex flex-col gap-6 justify-center">
+    <div class="bg-white border rounded-md shadow text-center p-4 w-64 mx-auto">
+        <img src="/foto/ip11.png" alt="iPhone 11" class="h-24 mx-auto object-contain mb-2" />
+        <p class="font-semibold">Iphone 11 Series</p>
+</div>
+    <div class="bg-white border rounded-md shadow text-center p-4 w-64 mx-auto">
+        <img src="/foto/iphoneX.jpg" alt="iPhone X" class="h-24 mx-auto object-contain mb-2" />
+        <p class="font-semibold">Iphone X Series</p>
+</div>
+</div>
+    <!-- Kolom tengah (iPhone 12) -->
+    <div class="flex flex-col gap-6 justify-center">
+    <div class="bg-white border rounded-md shadow text-center p-4 w-64 mx-auto">
+        <img src="/foto/iphone 12series.png" alt="iPhone 12" class="h-24 mx-auto object-contain mb-2" />
+        <p class="font-semibold">Iphone 12 Series</p>
+    </div>
+    <div class="bg-white border rounded-md shadow text-center p-4 w-64 mx-auto">
+        <img src="/foto/samsung S.png" alt="Samsung S Series" class="h-24 mx-auto object-contain mb-2" />
+        <p class="font-semibold">Samsung S Series</p>
+    </div>
+    </div>
+    <!-- Kolom kanan -->
+    <div class="flex flex-col gap-6 justify-center">
+    <div class="bg-white border rounded-md shadow text-center p-4 w-64 mx-auto">
+        <img src="/foto/ip13.png" alt="iPhone 13" class="h-24 mx-auto object-contain mb-2" />
+        <p class="font-semibold">Iphone 13 Series</p>
+    </div>
+    <div class="bg-white border rounded-md shadow text-center p-4 w-64 mx-auto">
+        <img src="/foto/galaxyS10.png" alt="Galaxy S10" class="h-24 mx-auto object-contain mb-2" />
+        <p class="font-semibold">Galaxy S10</p>
+    </div>
+    </div>
+</div>
+<section class="bg-white-800 py-8 px-4">
+    <h2 class="text-3xl font-bold text-center mb-8 font-[jerey20]">Superstar Kami</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+<!-- Card -->
+<div class="bg-white border rounded-xl shadow p-4 text-left hover:shadow-lg transition h-[360px]">
+    <div class="flex items-center justify-center h-40 mb-4">
+        <img src="/foto/ip11red.png" alt="iPhone 11" class="object-contain h-full" />
+    </div>
+    <div>
+        <h3 class="font-bold text-lg">Iphone 11 - 64 - Red</h3>
+        <p class="text-gray-800 mt-1">Rp. 4.950.000</p>
+    </div>
+</div>
+<div class="bg-white border rounded-xl shadow p-4 text-left hover:shadow-lg transition h-[360px]">
+    <div class="flex items-center justify-center h-40 mb-4">
+        <img src="/foto/opporeno.png" alt="Reno6" class="object-contain h-full" />
+    </div>
+    <div>
+        <h3 class="font-bold text-lg">Reno6 - 128GB - 8GB - Black</h3>
+        <p class="text-gray-800 mt-1">Rp. 1.900.000</p>
+    </div>
+</div>
+<div class="bg-white border rounded-xl shadow p-4 text-left hover:shadow-lg transition h-[360px]">
+    <div class="flex items-center justify-center h-40 mb-4">
+        <img src="/foto/ip12pro.png" alt="iPhone 12 Pro" class="object-contain h-full" />
+    </div>
+    <div>
+        <h3 class="font-bold text-lg">Iphone 12 Pro - 128GB - Graphite</h3>
+        <p class="text-gray-800 mt-1">Rp. 8.200.000</p>
+    </div>
+</div>
+<div class="bg-white border rounded-xl shadow p-4 text-left hover:shadow-lg transition h-[360px]">
+    <div class="flex items-center justify-center h-40 mb-4">
+        <img src="/foto/ip15.png" alt="iPhone 15 Plus" class="object-contain h-full" />
+    </div>
+    <div>
+        <h3 class="font-bold text-lg">Iphone 15 Plus - 128GB - Blue</h3>
+        <p class="text-gray-800 mt-1">Rp. 12.200.000</p>
+    </div>
+</div>
+<div class="bg-white border rounded-xl shadow p-4 text-left hover:shadow-lg transition h-[360px] flex flex-col justify-between">
+    <div class="flex items-center justify-center h-40 mb-4">
+        <img src="/foto/a16.jpg" alt="iPhone XR" class="object-contain h-full" />
+    </div>
+    <div>
+        <h3 class="font-bold text-lg">Galaxy A16 - 256GB - Black</h3>
+        <p class="text-gray-800 mt-1">Rp. 4.300.000</p>
+    </div>
+</div>
+<div class="bg-white border rounded-xl shadow p-4 text-left hover:shadow-lg transition h-[360px]">
+    <div class="flex items-center justify-center h-40 mb-4">
+        <img src="/foto/ip13 pink.png" alt="iPhone 13" class="object-contain h-full" />
+    </div>
+    <div>
+        <h3 class="font-bold text-lg">Iphone 13 - 128GB - Pink</h3>
+        <p class="text-gray-800 mt-1">Rp. 7.130.000</p>
+    </div>
+</div>
+</section>
+<section class="bg-white border border-gray-200 rounded-lg shadow p-6 max-w-6xl mx-auto my-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- Kolom Kiri -->
+    <div>
+        <h2 class="text-2xl font-bold mb-4">Sedikit Tentang Zyntek</h2>
+        <p class="text-gray-700 mb-4">
+        Selamat datang di Zyntek! Kami adalah marketplace terpercaya yang menghadirkan berbagai pilihan smartphone terbaru dengan teknologi terkini dan harga bersaing.
+        </p>
+        <p class="text-gray-700 mb-4">
+        Misi kami adalah memberikan pengalaman berbelanja gadget yang mudah, aman, dan memuaskan. Di Zyntek, kami hanya menyediakan produk original dan bergaransi resmi, sehingga kamu bisa belanja tanpa rasa khawatir.
+        </p>
+        <p class="text-gray-700 mb-4">
+        Dengan Zyntek, kamu nggak cuma dapet HP keren, tapi juga pelayanan terbaik, pengiriman cepat, dan jaminan kualitas untuk setiap produk yang kamu beli.
+        </p>
+        <div class="text-yellow-500 text-xl">
+        ★★★★★
+        </div>
+    </div>
+    <!-- Kolom Kanan: Fitur -->
+    <div class="grid grid-cols-2 gap-6 text-sm text-center">
+        <div class="flex flex-col items-center">
+        <img src="/foto/jaminan.png" alt="Jamianan Kualitas" class="w-10 h-10 mb-2">
+        <p class="font-semibold text-blue-600">Jaminan Kualitas</p>
+        <p class="text-gray-600">Ponsel berfungsi 100%. Garansi 12 bulan gratis.</p>
+        </div>
+        <div class="flex flex-col items-center">
+        <img src="/foto/harga.png" alt="Harga Terjangkau" class="w-10 h-10 mb-2">
+        <p class="font-semibold text-blue-600">Keterjangkauan Harga</p>
+        <p class="text-gray-600">Pilihan produk kami berkualitas tinggi dengan harga yang terjangkau.</p>
+        </div>
+        <div class="flex flex-col items-center">
+        <img src="/foto/legalitas.png" alt="Legalitas" class="w-10 h-10 mb-2">
+        <p class="font-semibold text-blue-600">Transparansi & Legalitas</p>
+        <p class="text-gray-600">Semua ponsel original dan tunduk pada peraturan terbaru.</p>
+        </div>
+        <div class="flex flex-col items-center">
+        <img src="/foto/layanan.png" alt="Layanan Pelanggan" class="w-10 h-10 mb-2">
+        <p class="font-semibold text-blue-600">Layanan Pelanggan</p>
+        <p class="text-gray-600">Kami selalu memberikan pengalaman belanja terbaik untukmu.</p>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- Testimoni Pelanggan -->
+<section class="bg-white-100 py-10 px-4">
+    <h2 class="text-3xl font-bold text-center mb-8">Testimoni Pelanggan</h2>
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Testimoni 1 -->
+    <div class="relative bg-white border rounded-xl shadow p-6 text-center">
+        <h3 class="font-bold text-lg mb-2">Joko</h3>
+        <div class="text-yellow-400 mb-2 text-xl">★★★★★</div>
+        <p class="text-gray-700 text-sm">
+        Proses cepet banget, dan HP nya juga dalam kondisi baik, mulus. Terima Kasih Zyntek
+        </p>
+    </div>
+    <!-- Testimoni 2 -->
+    <div class="relative bg-white border rounded-xl shadow p-6 text-center">
+        <!-- Tombol panah kanan -->
+        <h3 class="font-bold text-lg mb-2">Stranger</h3>
+        <div class="text-yellow-400 mb-2 text-xl">★★★★★</div>
+        <p class="text-gray-700 text-sm">
+        Aku kasih 5 Bintang buat zyntek! Servicenya fast response banget dan bisa kasih pilihan yang intinya bikin pembeli lebih puas dan ga rugi buat beli hpnya! Good Job!
+        </p>
+    </div>
+    </div>
+</section>
+<!-- Top Brands Section -->
+<section class="bg-white-100 py-10 px-4">
+    <h2 class="text-3xl font-bold text-center mb-8 pt-10">Top Brands</h2>
+    <div class="flex justify-center items-center gap-16 flex-wrap">
+    <img src="/foto/apple (1) 1.png" alt="Apple" class="h-24 opacity-60 grayscale" />
+    <img src="/foto/oppo 1.png" alt="Oppo" class="h-20 opacity-60 grayscale" />
+    <img src="/foto/vivo 1.png" alt="Vivo" class="h-20 opacity-60 grayscale" />
+    <img src="/foto/samsung 1.png" alt="Samsung" class="h-20 opacity-60 grayscale" />
+    </div>
+</section>
+<section class="bg-white py-6 mt-4 px-4 w-full">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 text-center text-gray-500">
+        <div class="flex flex-col items-center">
+            <div class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-blue-400 mb-1">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <p class="text-xs">pengiriman ekspres</p>
+        </div>
+        <div class="flex flex-col items-center">
+            <div class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-blue-400 mb-1">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <p class="text-xs">transaksi aman</p>
+        </div>
+        <div class="flex flex-col items-center">
+            <div class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-blue-400 mb-1">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <p class="text-xs">kualitas terjamin</p>
+        </div>
+    </div>
+</section>
+<footer class="bg-white border-t border-gray-300 mt-10">
+    <div class="max-w-6xl mx-auto py-8 px-4 grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <!-- Kiri: Logo & Social -->
+        <div>
+            <h2 class="text-xl font-bold text-blue-600 mb-1">ZYNTEK</h2>
+            <p class="text-xs text-gray-500 mb-4">FEEL THE FUTURE</p>
+            <p class="mb-2">Ikuti</p>
+            <div class="flex space-x-3">
+                <a href="#">
+                    <img src="/foto/facebook.png" alt="Facebook" class="h-6">
+                </a>
+                <a href="#">
+                    <img src="/foto/X.png" alt="Twitter" class="h-6">
+                </a>
+                <a href="#">
+                    <img src="/foto/ig.png" alt="Instagram" class="h-6">
+                </a>
+            </div>
+        </div>
+        <!-- Kanan: 3 kolom sejajar -->
+        <div class="grid grid-cols-3 text-left text-sm text-gray-700">
+            <!-- Tentang Kami -->
+            <div>
+                <h3 class="font-semibold mb-2">Tentang Kami</h3>
+                <ul class="space-y-1">
+                    <li><a href="#" class="hover:underline">Siapa Kami</a></li>
+                    <li><a href="#" class="hover:underline">Blog</a></li>
+                    <li><a href="#" class="hover:underline">Cara Beli</a></li>
+                </ul>
+            </div>
+            <!-- Kebijakan -->
+            <div>
+                <h3 class="font-semibold mb-2">Kebijakan</h3>
+                <ul class="space-y-1">
+                    <li><a href="#" class="hover:underline">Syarat & Ketentuan</a></li>
+                    <li><a href="#" class="hover:underline">Kebijakan Privasi</a></li>
+                </ul>
+            </div>
+            <!-- Kontak Kami -->
+            <div>
+                <h3 class="font-semibold mb-2">Kontak Kami</h3>
+                <ul class="space-y-1">
+                    <li><a href="#" class="hover:underline">Kirim Pesan</a></li>
+                    <li>+62 829 0809 1230</li>
+                    <li>Zyntek@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Logo pembayaran -->
+    <div class="max-w-6xl mx-auto py-4 px-4 flex flex-wrap justify-center items-center gap-4 border-t border-gray-300">
+            <img src="/foto/gopay.png" alt="Gopay" class="h-6">
+            <img src="/foto/dana.png" alt="Dana" class="h-6">
+            <img src="/foto/indomart.png" alt="Alfamart" class="h-6">
+            <img src="/foto/alfa.png" alt="Alfamidi" class="h-6">
+            <img src="/foto/Bca.png" alt="BCA" class="h-6">
+            <img src="/foto/mandiri.png" alt="Mandiri" class="h-6">
+            <img src="/foto/bri.png" alt="BRI" class="h-6">
+            <img src="/foto/bni.png" alt="BNI" class="h-6">
+</div>
+<!-- Copyright -->
+    <div class="max-w-6xl mx-auto py-2 px-4 flex justify-center text-xs text-gray-400">
+        <span>© 2025 Zyntek - Hak Cipta Dilindungi</span>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+</body>
+</html>

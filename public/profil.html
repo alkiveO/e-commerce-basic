@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil</title>
+  <link href="./output.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <style>
+    input:disabled {
+      background: transparent;
+      border: none;
+      padding-left: 0;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 p-6 font-sans">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <a href="home.html">
+      <ion-icon name="arrow-back" class="text-3xl text-sky-500"></ion-icon>
+    </a>
+    <h1 class="text-2xl font-bold text-sky-500">Profil</h1>
+    <a href="landing.html">
+      <ion-icon name="log-out-outline" class="text-3xl text-sky-500"></ion-icon>
+    </a>
+  </div>
+
+  <!-- Konten Tengah -->
+  <div class="flex-grow flex items-start justify-center px-6 pt-20">
+    <div class="w-full max-w-4xl p-8">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-16">
+        <!-- Foto Profil -->
+        <div class="flex flex-col items-center">
+          <div class="w-40 h-40 rounded-full overflow-hidden">
+            <img src="/foto/pfp.png" alt="Foto Profil" class="object-cover w-full h-full">
+          </div>
+          <div class="flex gap-4 mt-4">
+<button id="editBtn" class="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-sky-600">
+  Edit
+</button>
+
+            <button id="saveBtn" class="bg-green-500 text-white text-sm px-4 py-2 rounded hover:bg-green-600 hidden">
+              Simpan
+            </button>
+          </div>
+        </div>
+
+        <!-- Info Profil -->
+        <div class="flex-1 space-y-8 w-full max-w-md">
+          <div>
+            <h2 class="text-xl font-bold">Nama</h2>
+            <input id="nama" class="w-full border-b border-gray-300 focus:outline-none" type="text" disabled value="Sawiya Yah Awi" />
+          </div>
+
+<div>
+  <h2 class="text-xl font-bold">Password</h2>
+  <input id="password" class="w-full border-b border-gray-300 focus:outline-none" type="password" disabled value="password123" />
+</div>
+
+
+          <div>
+            <h2 class="text-xl font-bold">Alamat</h2>
+            <input id="alamat" class="w-full border-b border-gray-300 focus:outline-none" type="text" disabled value="Kota Bandung, Jawa Barat" />
+          </div>
+
+          <div>
+            <h2 class="text-xl font-bold">Nomor Telepon</h2>
+            <input id="telepon" class="w-full border-b border-gray-300 focus:outline-none" type="text" disabled value="+62-829-0830-1209" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script JavaScript -->
+  <script>
+window.onload = () => {
+  const fields = ['nama', 'alamat', 'telepon', 'password'];
+  const editBtn = document.getElementById('editBtn');
+  const saveBtn = document.getElementById('saveBtn');
+
+  // Load data dari localStorage jika ada
+  fields.forEach(field => {
+    const saved = localStorage.getItem(field);
+    if (saved) {
+      document.getElementById(field).value = saved;
+    }
+  });
+
+  // Klik tombol Edit: enable input dan tampilkan password
+  editBtn.addEventListener('click', () => {
+    fields.forEach(field => {
+      const input = document.getElementById(field);
+      input.disabled = false;
+      if (field === 'password') {
+        input.type = 'text';
+      }
+    });
+    editBtn.classList.add('hidden');
+    saveBtn.classList.remove('hidden');
+  });
+
+  // Klik tombol Simpan: simpan ke localStorage, disable input dan sembunyikan password
+  saveBtn.addEventListener('click', () => {
+    fields.forEach(field => {
+      const input = document.getElementById(field);
+      localStorage.setItem(field, input.value);
+      input.disabled = true;
+      if (field === 'password') {
+        input.type = 'password';
+      }
+    });
+    editBtn.classList.remove('hidden');
+    saveBtn.classList.add('hidden');
+    alert('Profil berhasil disimpan!');
+  });
+};
+
+  </script>
+</body>
+</html>

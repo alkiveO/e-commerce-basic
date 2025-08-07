@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keranjang</title>
+  <link href="./output.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <div class="flex items-center gap-2 text-white bg-gray-800 px-4 py-3">
+    <a href="home.html">
+      <ion-icon name="arrow-back-outline" class="text-2xl cursor-pointer hover:text-sky-400 transition"></ion-icon>
+    </a>
+    <h1 class="text-xl font-bold text-sky-400 ml-2">Zyntek</h1>
+  </div>
+
+  <h1 class="text-2xl font-bold text-center mb-6 mt-8">Keranjang Belanja</h1>
+
+  <!-- Checkbox Pilih Semua -->
+  <div class="max-w-3xl mx-auto px-4 mt-4 flex items-center gap-2">
+    <input type="checkbox" id="pilih-semua" data-role="checkbox-semua" onchange="togglePilihSemua(this)">
+    <label for="pilih-semua" class="text-sm text-gray-700">Pilih Semua</label>
+  </div>
+
+  <!-- Daftar Produk -->
+  <div id="keranjang-list" class="max-w-3xl mx-auto px-4 space-y-4 mt-2" data-role="daftar-keranjang"></div>
+
+  <!-- Total Harga -->
+  <div class="max-w-3xl mx-auto px-4 mt-4 flex justify-between items-center" id="total-section">
+    <p class="text-lg font-semibold">Total: <span id="total-harga" class="text-blue-600">Rp 0</span></p>
+  </div>
+
+  <!-- Tombol Checkout -->
+  <div class="max-w-3xl mx-auto px-4 mt-6 flex justify-end">
+    <button onclick="checkout()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50" id="checkout-btn" disabled data-role="tombol-checkout">Checkout</button>
+  </div>
+
+  <script>
+    let keranjang = [];
+    let pilihanProduk = new Set();
+
+    function muatKeranjang() {
+      const data = localStorage.getItem("keranjang");
+      if (data) keranjang = JSON.parse(data);
+    }
+
+    function renderKeranjang() {
+      const container = document.getElementById("keranjang-list");
+      container.innerHTML = "";
+
+      if (keranjang.length === 0) {
+        container.innerHTML = "<p class='text-center text-gray-500'>Keranjang kosong.</p>";
+        document.getElementById("checkout-btn").disabled = true;
+        document.getElementById("pilih-semua").checked = false;
+        document.getElementById("pilih-semua").indeterminate = false;
+        document.getElementById("total-harga").innerText = "Rp 0";
+        pilihanProduk.clear();
+        return;
+      }
+
+      keranjang.forEach((item, index) => {
+        const el = document.createElement("div");
+        el.className = "flex gap-4 p-4 bg-white border rounded shadow items-center";
+        el.setAttribute("data-role", "item-keranjang");
+        el.setAttribute("data-produk-id", item.id);
+
+        const isChecked = pilihanProduk.has(index) ? "checked" : "";
+
+        el.innerHTML = `
+          <input type="checkbox" class="pilih-item" data-role="checkbox-produk" onchange="updateCheckoutState()" data-index="${index}" ${isChecked} />
+          <img src="${item.image}" alt="Gambar ${item.title}" class="w-16 h-16 object-contain" data-role="gambar-produk" />
+          <div class="flex-1" data-role="info-produk">
+            <h3 class="font-medium">${item.title}</h3>
+            <p>Rp ${(item.price * 16000 * item.jumlah).toLocaleString('id-ID')} <span class="text-sm text-gray-500">(${item.jumlah}x)</span></p>
+          </div>
+          <div class="flex items-center gap-2" data-role="kontrol-jumlah">
+            <button onclick="ubahJumlah(${index}, -1)" class="bg-gray-200 px-2 rounded" data-role="btn-kurang">−</button>
+            <span data-role="jumlah">${item.jumlah}</span>
+            <button onclick="ubahJumlah(${index}, 1)" class="bg-gray-200 px-2 rounded" data-role="btn-tambah">＋</button>
+            <button onclick="hapusItem(${index})" class="text-red-600 px-2" data-role="btn-hapus">🗑️</button>
+          </div>
+        `;
+        container.appendChild(el);
+      });
+
+      updateCheckoutState();
+    }
+
+    function togglePilihSemua(checkbox) {
+      const semuaCheckbox = document.querySelectorAll(".pilih-item");
+      pilihanProduk.clear();
+      semuaCheckbox.forEach((cb, idx) => {
+        cb.checked = checkbox.checked;
+        if (checkbox.checked) pilihanProduk.add(idx);
+      });
+      updateCheckoutState();
+    }
+
+    function updateCheckoutState() {
+      const checkboxes = document.querySelectorAll(".pilih-item");
+      const pilihSemua = document.getElementById("pilih-semua");
+
+      let jumlahDipilih = 0;
+      let totalHarga = 0;
+
+      pilihanProduk.clear();
+
+      checkboxes.forEach(cb => {
+        if (cb.checked) {
+          pilihanProduk.add(Number(cb.dataset.index));
+          jumlahDipilih++;
+          const item = keranjang[Number(cb.dataset.index)];
+          totalHarga += item.price * 16000 * item.jumlah;
+        }
+      });
+
+      document.getElementById("checkout-btn").disabled = jumlahDipilih === 0;
+
+      const total = checkboxes.length;
+      if (total > 0) {
+        pilihSemua.checked = jumlahDipilih === total;
+        pilihSemua.indeterminate = jumlahDipilih > 0 && jumlahDipilih < total;
+      } else {
+        pilihSemua.checked = false;
+        pilihSemua.indeterminate = false;
+      }
+
+      document.getElementById("total-harga").innerText = "Rp " + totalHarga.toLocaleString("id-ID");
+    }
+
+    function ubahJumlah(index, delta) {
+      keranjang[index].jumlah += delta;
+      if (keranjang[index].jumlah <= 0) {
+        keranjang.splice(index, 1);
+        // Jika hapus produk, juga hapus dari pilihan
+        pilihanProduk.delete(index);
+        // Karena array berubah, pilihanProduk harus di-reset dan disesuaikan ulang
+        const baru = new Set();
+        pilihanProduk.forEach(i => {
+          if(i > index) baru.add(i -1);
+          else if(i < index) baru.add(i);
+        });
+        pilihanProduk = baru;
+      }
+      simpan();
+      renderKeranjang();
+    }
+
+    function hapusItem(index) {
+      keranjang.splice(index, 1);
+      pilihanProduk.delete(index);
+      // Sesuaikan pilihanProduk karena indeks berubah
+      const baru = new Set();
+      pilihanProduk.forEach(i => {
+        if(i > index) baru.add(i -1);
+        else if(i < index) baru.add(i);
+      });
+      pilihanProduk = baru;
+
+      simpan();
+      renderKeranjang();
+    }
+
+    function simpan() {
+      localStorage.setItem("keranjang", JSON.stringify(keranjang));
+    }
+
+    function checkout() {
+      const checkboxes = document.querySelectorAll(".pilih-item");
+      const produkDipilih = [];
+      checkboxes.forEach(cb => {
+        if (cb.checked) {
+          const idx = Number(cb.dataset.index);
+          produkDipilih.push(keranjang[idx]);
+        }
+      });
+
+      if (produkDipilih.length === 0) return alert("Pilih produk yang mau di-checkout!");
+
+      localStorage.setItem("pembayaranProduk", JSON.stringify(produkDipilih));
+
+      // Hapus produk yang dipilih dari keranjang
+      keranjang = keranjang.filter((_, i) => !checkboxes[i].checked);
+      pilihanProduk.clear();
+      simpan();
+      renderKeranjang();
+
+      window.location.href = "pembayaran.html";
+    }
+
+    window.onload = () => {
+      muatKeranjang();
+      renderKeranjang();
+    };
+  </script>
+</body>
+</html>
