@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pembayaran</title>
+  <link href="./output.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <div class="flex items-center gap-2 text-white bg-gray-800 px-4 py-3">
+    <a href="home.html">
+      <ion-icon name="arrow-back-outline" class="text-2xl cursor-pointer hover:text-sky-400 transition"></ion-icon>
+    </a>
+    <h1 class="text-xl font-bold text-sky-400 ml-2">Zyntek</h1>
+
+    <!-- Link Riwayat Pembelian di kanan -->
+    <a href="riwayat.html" class="ml-auto flex items-center gap-1 text-sky-400 hover:text-sky-600 cursor-pointer">
+      <ion-icon name="time-outline" class="text-xl"></ion-icon>
+      <span class="font-semibold text-sm">Riwayat</span>
+    </a>
+  </div>
+
+  <!-- Main -->
+  <div class="flex-grow flex justify-center mt-10 mb-10">
+    <div class="max-w-6xl w-full p-4">
+      <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
+
+        <!-- Kiri: Produk & Alamat -->
+        <div class="space-y-4">
+
+          <!-- Produk -->
+          <div id="product-container" class="bg-white p-4 rounded-md shadow border space-y-4">
+            <!-- Produk diisi dari JS -->
+          </div>
+
+          <!-- Alamat & Pembayaran -->
+          <div class="bg-white p-4 rounded-md shadow border">
+            <div class="flex justify-between items-center mb-2">
+              <h2 class="text-lg font-semibold text-gray-600">Alamat Pengiriman</h2>
+              <button id="editAlamatBtn" class="text-blue-600 hover:underline text-sm">Edit</button>
+            </div>
+
+            <!-- Tampilan Alamat -->
+            <div id="alamat-tampil">
+              <div class="flex items-start gap-3 mb-2">
+                <ion-icon name="location-outline" class="text-xl mt-1"></ion-icon>
+                <div>
+                  <p class="font-semibold" id="alamat-nama">Rumah - Stranger</p>
+                  <p class="text-sm text-gray-600" id="alamat-jalan">Jl. Kenangan RT09/RW08 No 30, Ciasing Kota Bandung Jawa Barat</p>
+                  <p class="text-sm text-gray-600" id="alamat-telp">+62-829-0830-1209</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Edit Alamat -->
+            <div id="alamat-edit" class="space-y-2 hidden bg-gray-100 p-3 rounded-md">
+              <input id="input-nama" type="text" placeholder="Nama Alamat" class="w-full border rounded p-2 text-sm" />
+              <textarea id="input-jalan" placeholder="Alamat Lengkap" class="w-full border rounded p-2 text-sm"></textarea>
+              <input id="input-telp" type="text" placeholder="No. Telepon" class="w-full border rounded p-2 text-sm" />
+              <div class="flex gap-2">
+                <button id="simpanAlamatBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Simpan</button>
+                <button id="batalAlamatBtn" class="bg-gray-400 hover:bg-gray-500 text-white px-3 py-1 rounded text-sm">Batal</button>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Metode Pembayaran -->
+            <h2 class="text-lg font-semibold text-gray-600 mb-2">Metode Pembayaran</h2>
+            <div class="space-y-2">
+              <select id="paymentSelect" class="w-full border rounded p-2 text-sm">
+                <option value="" selected disabled>Pilih metode pembayaran</option>
+                <option value="DANA">DANA</option>
+                <option value="GOPAY">GOPAY</option>
+                <option value="BCA">BCA</option>
+                <option value="MANDIRI">MANDIRI</option>
+                <option value="BRI">BRI</option>
+                <option value="BNI">BNI</option>
+                <option value="COD">TUNAI</option>
+              </select>
+              <p id="paymentWarning" class="text-red-500 text-sm hidden mt-1">Silakan pilih metode pembayaran!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kanan: Total & Checkout -->
+        <div class="bg-white p-4 rounded-md shadow border h-fit w-full md:w-[280px]">
+          <div class="flex justify-between mb-4">
+            <p class="text-lg font-semibold">Total:</p>
+            <p id="total-harga" class="text-lg font-bold">Rp. 0</p>
+          </div>
+          <button id="checkoutBtn" class="w-full bg-blue-600 hover:bg-sky-500 text-white py-2 rounded-md font-medium transition">
+            Checkout
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Sukses -->
+  <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-8 relative w-full max-w-sm border border-gray-300">
+      <button onclick="closeModal()" class="absolute top-2 right-2 text-2xl text-gray-700 hover:text-red-500 transition">&times;</button>
+      <h2 class="text-xl font-bold text-center mb-4">Pembayaran Berhasil!</h2>
+      <img src="https://cdn-icons-png.flaticon.com/512/845/845646.png" alt="Success" class="w-20 h-20 mx-auto mb-4" />
+      <p class="text-center font-semibold text-lg">Terima Kasih sudah berbelanja di Zyntek!</p>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const productContainer = document.getElementById("product-container");
+      const totalHarga = document.getElementById("total-harga");
+      const checkoutBtn = document.getElementById("checkoutBtn");
+      const successModal = document.getElementById("successModal");
+      const warning = document.getElementById("paymentWarning");
+
+      // Alamat edit
+      const editAlamatBtn = document.getElementById("editAlamatBtn");
+      const simpanAlamatBtn = document.getElementById("simpanAlamatBtn");
+      const batalAlamatBtn = document.getElementById("batalAlamatBtn");
+      const alamatTampil = document.getElementById("alamat-tampil");
+      const alamatEdit = document.getElementById("alamat-edit");
+
+      const namaField = document.getElementById("alamat-nama");
+      const jalanField = document.getElementById("alamat-jalan");
+      const telpField = document.getElementById("alamat-telp");
+
+      const inputNama = document.getElementById("input-nama");
+      const inputJalan = document.getElementById("input-jalan");
+      const inputTelp = document.getElementById("input-telp");
+
+      editAlamatBtn.addEventListener("click", () => {
+        inputNama.value = namaField.textContent;
+        inputJalan.value = jalanField.textContent;
+        inputTelp.value = telpField.textContent;
+        alamatTampil.classList.add("hidden");
+        alamatEdit.classList.remove("hidden");
+      });
+
+      simpanAlamatBtn.addEventListener("click", () => {
+        namaField.textContent = inputNama.value || "Tanpa Nama";
+        jalanField.textContent = inputJalan.value || "Alamat belum diisi";
+        telpField.textContent = inputTelp.value || "-";
+        alamatTampil.classList.remove("hidden");
+        alamatEdit.classList.add("hidden");
+      });
+
+      batalAlamatBtn.addEventListener("click", () => {
+        alamatTampil.classList.remove("hidden");
+        alamatEdit.classList.add("hidden");
+      });
+
+      // Produk
+      const dataStr = localStorage.getItem("pembayaranProduk");
+      let produk = [];
+      if (dataStr) {
+        try {
+          produk = JSON.parse(dataStr);
+        } catch (e) {
+          console.error("Data pembayaran rusak", e);
+        }
+      }
+
+      if (!produk || produk.length === 0) {
+        productContainer.innerHTML = "<p class='text-gray-500 italic'>Tidak ada produk untuk dibayar.</p>";
+        totalHarga.textContent = "Rp. 0";
+        checkoutBtn.disabled = true;
+        checkoutBtn.classList.add("opacity-50", "cursor-not-allowed");
+        return;
+      }
+
+      let total = 0;
+      productContainer.innerHTML = "";
+      produk.forEach((item, index) => {
+        const hargaIDR = item.price * 16000;
+        const subTotal = hargaIDR * (item.jumlah || 1);
+        total += subTotal;
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "flex items-start gap-3 border p-3 rounded-md shadow-sm";
+
+        wrapper.innerHTML = `
+          <img src="${item.image}" alt="${item.title}" class="w-20 h-20 object-contain" />
+          <div class="flex-1">
+            <h3 class="font-semibold text-sm line-clamp-2">${item.title}</h3>
+            <p class="text-sm mt-1">Kondisi: Baru</p>
+            <p class="text-sm">Jumlah: ${item.jumlah || 1}</p>
+            <p class="font-bold text-sm mt-1">Rp. ${subTotal.toLocaleString("id-ID")}</p>
+          </div>
+          <button aria-label="Hapus Produk" onclick="hapusProduk(${index})">
+            <ion-icon name="trash-outline" class="text-2xl text-red-600 hover:text-red-800 transition cursor-pointer"></ion-icon>
+          </button>
+        `;
+        productContainer.appendChild(wrapper);
+      });
+
+      const ongkir = 10000;
+      total += ongkir;
+      totalHarga.textContent = `Rp. ${total.toLocaleString("id-ID")}`;
+
+      checkoutBtn.addEventListener("click", () => {
+        const selectedMethod = document.getElementById("paymentSelect").value;
+        if (!selectedMethod) {
+          warning.classList.remove("hidden");
+          return;
+        } else {
+          warning.classList.add("hidden");
+        }
+
+        // Ambil riwayat lama
+        let history = JSON.parse(localStorage.getItem("history")) || [];
+
+        // Tambahkan produk yang dibeli ke history
+        produk.forEach(item => {
+          history.push({
+            productId: item.id,
+            quantity: item.jumlah || 1,
+            size: item.size || null,
+            date: new Date().toISOString(),
+          });
+        });
+
+        // Simpan ulang riwayat ke localStorage
+        localStorage.setItem("history", JSON.stringify(history));
+
+        // Hapus data produk yang sudah dibayar
+        localStorage.removeItem("pembayaranProduk");
+
+        // Tampilkan modal sukses
+        successModal.classList.remove("hidden");
+
+        setTimeout(() => {
+          location.reload();
+        }, 5000);
+      });
+    });
+
+    function hapusProduk(index) {
+      const dataStr = localStorage.getItem("pembayaranProduk");
+      if (!dataStr) return;
+      let produk = JSON.parse(dataStr);
+      produk.splice(index, 1);
+      localStorage.setItem("pembayaranProduk", JSON.stringify(produk));
+      location.reload();
+    }
+
+    function closeModal() {
+      document.getElementById("successModal").classList.add("hidden");
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+</body>
+</html>
